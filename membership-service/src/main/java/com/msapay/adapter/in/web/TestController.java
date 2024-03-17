@@ -1,4 +1,4 @@
-package org.example;
+package com.msapay.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,4 +11,6 @@ public class TestController {
     void test(){
         System.out.println("Hello");
     }
+    // 외부로부터의 http요청, 외부에서 내부로 들어오는 어뎁터 역할을 한다.
+    //
 }
