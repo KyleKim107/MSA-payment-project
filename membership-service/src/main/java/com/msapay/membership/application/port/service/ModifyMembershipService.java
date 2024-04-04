@@ -3,9 +3,9 @@ package com.msapay.membership.application.port.service;
 import com.msapay.common.UseCase;
 import com.msapay.membership.adapter.out.persistence.MembershipJpaEntity;
 import com.msapay.membership.adapter.out.persistence.MembershipMapper;
-import com.msapay.membership.application.port.in.RegisterMembershipCommand;
-import com.msapay.membership.application.port.in.RegisterMembershipUseCase;
-import com.msapay.membership.application.port.out.RegisterMembershipPort;
+import com.msapay.membership.application.port.in.ModifyMembershipCommand;
+import com.msapay.membership.application.port.in.ModifyMembershipUseCase;
+import com.msapay.membership.application.port.out.ModifyMembershipPort;
 import com.msapay.membership.domain.Membership;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 @UseCase
 @RequiredArgsConstructor
 @Transactional
-public class RegisterMembershipService implements RegisterMembershipUseCase {
-    private final RegisterMembershipPort registerMembershipPort;
+public class ModifyMembershipService implements ModifyMembershipUseCase {
+
+    private final ModifyMembershipPort modifyMembershipPort;
     private final MembershipMapper membershipMapper;
     @Override
-    public Membership registerMembership(RegisterMembershipCommand command){
+    public Membership modifyMembership (ModifyMembershipCommand command){
         // command -> DB
 
         //buisiness logic -> DB
         // needs to go external system
         // port -> adapter
-        MembershipJpaEntity entity = registerMembershipPort.createMembership(
+        MembershipJpaEntity entity = modifyMembershipPort.modifyMembership(
+                new Membership.MembershipId(command.getMembershipId()),
                 new Membership.MembershipName(command.getName()),
                 new Membership.MembershipAddress(command.getAddress()),
                 new Membership.MembershipEmail(command.getEmail()),

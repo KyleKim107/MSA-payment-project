@@ -1,6 +1,6 @@
 package com.msapay.membership.application.port.in;
 
-import common.SelfValidating;
+import com.msapay.common.SelfValidating;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,3 +1,4 @@
 rootProject.name = 'MyfastcampusPay'
 include 'membership-service'
+include 'common'
 

@@ -1,4 +1,4 @@
-package common;
+package com.msapay.common;
 
 import javax.validation.*;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package common;
+package com.msapay.common;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
