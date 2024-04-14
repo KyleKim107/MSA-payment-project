@@ -1,15 +1,14 @@
-//buildscript {
-//    dependencies {
-//        classpath "io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE"
-//    }
-//}
-//plugins {
-//    id 'org.springframework.boot' version '2.5.2'
-//    id 'java'
-//}
+
+plugins {
+    id 'com.palantir.docker' version '0.25.0'
+}
+
+ext {
+    axonVersion = "4.6.0"
+}
 
 group 'com.msapay.membership'
-version '1.0-SNAPSHOT'
+version '1.0.1'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -25,20 +24,20 @@ dependencies {
 
     runtimeOnly 'com.h2database:h2'
 }
+//docker {
+//    println(tasks.bootJar.outputs.files)
+//    name rootProject.name+'-'+project.name + ":" + version
+//    dockerfile file('../Dockerfile')
+//    files tasks.bootJar.outputs.files
+//    buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
+//}
 
-
-test {
-    useJUnitPlatform()
-}
-
-bootRun {
-    enabled = false
-}
-
-bootJar {
-    enabled = false
-}
-
-bootBuildImage{
-    enabled = false
+docker {
+    println(tasks.bootJar.outputs.files) // 이미지 이름
+    name rootProject.name+'-'+project.name + ":" + version // 어떤 Docker File
+    // 어떤 파일들을 Dockerfile에 복사할 것인가
+    dockerfile file('../Dockerfile') // DockerFile을 최상위 디렉토리로 옮길때.
+//    dockerfile file('./Dockerfile') // DockerFile이 membership-service하위에 있을떄
+    files tasks.bootJar.outputs.files // Dockerfile에 전달할 인자.
+    buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
 }

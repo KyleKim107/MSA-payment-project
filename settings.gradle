@@ -1,4 +1,4 @@
-rootProject.name = 'MyfastcampusPay'
+rootProject.name = 'myfastcampuspay'
 include 'membership-service'
 include 'common'
 
