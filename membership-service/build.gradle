@@ -8,7 +8,7 @@ ext {
 }
 
 group 'com.msapay.membership'
-version '1.0.1'
+version '1.0.2'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -21,8 +21,9 @@ dependencies {
     implementation project(path: ':common')
 
     testImplementation 'junit:junit:4.13.1'
+    runtimeOnly 'mysql:mysql-connector-java'
 
-    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.h2database:h2'
 }
 //docker {
 //    println(tasks.bootJar.outputs.files)

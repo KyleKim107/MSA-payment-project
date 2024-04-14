@@ -1,0 +1,52 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0 # mysql 공식 이미지 사용.
+    networks:
+      - fastcampuspay_network
+    volumes:
+      # ./db/conf.d 파일이 컨테이너 내부의 /etc/mysql/conf.d파일과 매핑이 된다.
+      - ./db/conf.d:/etc/mysql/conf.d # 역으로도 컨테이너에서 변경사항도 로컬에 동기화 된다.
+      - ./db/data:/var/lib/mysql
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    env_file: .env
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=Asia/Seoul
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+
+#  axon-server:
+#    container_name: axon-server
+#    image: axoniq/axonserver:4.6.3-jdk-11-dev
+#    networks:
+#      - fastcampuspay_network
+#    ports:
+#      - "8024:8024"
+#      - "8124:8124"
+#    volumes:
+#      - axonserver-data:/axonserver/data
+#      - axonserver-events:/axonserver/events
+#      - axonserver-config:/axonserver/config:ro
+
+  membership-service:
+    image: myfastcampuspay-membership-service:1.0.2
+    networks:
+      - fastcampuspay_network # 밑에 network에 정의해둔 네트워크 프로파일 사용.
+    ports:
+      - "8081:8080" #8081에서 8080으로 포트를 포팅한다. 좌측은 OS 레벨이고 우측은 컨테이너 안에서의 포트
+    depends_on: # 밑에 리스트된 서비스가 실행 되어야 이 서비스가 실행될 수 있다.
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/fastcampus_pay?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=mysqluser
+      - SPRING_DATASOURCE_PASSWORD=mysqlpw
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+
+networks:
+  fastcampuspay_network:
+    driver: bridge
