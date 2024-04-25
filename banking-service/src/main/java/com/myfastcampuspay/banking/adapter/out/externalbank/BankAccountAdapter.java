@@ -4,7 +4,6 @@ import com.msapay.common.ExternalSystemAdapter;
 import com.myfastcampuspay.banking.adapter.out.persistence.RegisteredBankAccountRepository;
 import com.myfastcampuspay.banking.application.port.out.RequestExternalFirmbankingPort;
 import com.myfastcampuspay.banking.application.port.out.RequsetBankAccountInfoPort;
-import com.myfastcampuspay.banking.domain.FirmbankingRequest;
 import lombok.RequiredArgsConstructor;
 
 @ExternalSystemAdapter
@@ -26,7 +25,6 @@ public class BankAccountAdapter implements RequsetBankAccountInfoPort, RequestEx
         // 실제로 외부 은행에 http 통신을 통해서 펌뱅킹 요청을 한다
         // 그 결과를 받고 파싱해서
         // firmbankingResult로 받는다.
-        FirmbankingResult result = new FirmbankingResult(0);
 
         return new FirmbankingResult(0);
     }

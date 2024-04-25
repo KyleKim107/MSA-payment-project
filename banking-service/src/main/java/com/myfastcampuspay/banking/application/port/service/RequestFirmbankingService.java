@@ -37,7 +37,7 @@ public class RequestFirmbankingService implements RequestFirmbankingUseCase {
                 new FirmbankingRequest.MoneyAmount(command.getMoneyAmount()),
                 new FirmbankingRequest.FirmbankingStatus(0)
         );
-        // 2.외부 은행에 펌뱅킹 요청
+        // 2.Request external firmbanking to validate the account
         FirmbankingResult result = requestExternalFirmbankingPort.requestExternalFirmbanking(
                 new ExternalFirmbankingRequest(
                         command.getFromBankName()
@@ -50,9 +50,9 @@ public class RequestFirmbankingService implements RequestFirmbankingUseCase {
         requestedEntity.setUuid(randomUUID.toString());
         // 3.결과에 따라서 1번에서 작성했던 FirmbankingRequest를 업데이트
         if(result.getResultCode() == 0){
-            requestedEntity.setFirmbankingStatus(1);
+            requestedEntity.setFirmbankingStatus(1);// 완료
         }else{
-            requestedEntity.setFirmbankingStatus(2);
+            requestedEntity.setFirmbankingStatus(2);// 실패
         }
         // 4.결과를 리턴
         return firmbankingRequestMapper.mapToDomainEntity(requestFirmbankingPort.modifyRequestFirmbanking(requestedEntity), randomUUID);

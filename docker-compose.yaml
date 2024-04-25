@@ -61,6 +61,21 @@ services:
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
+  money-service:
+    image: myfastcampuspay-money-service:1.0.2
+    networks:
+      - fastcampuspay_network # 밑에 network에 정의해둔 네트워크 프로파일 사용.
+    ports:
+      - "8083:8080" #8081에서 8080으로 포트를 포팅한다. 좌측은 OS 레벨이고 우측은 컨테이너 안에서의 포트
+    depends_on: # 밑에 리스트된 서비스가 실행 되어야 이 서비스가 실행될 수 있다.
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/fastcampus_pay?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=mysqluser
+      - SPRING_DATASOURCE_PASSWORD=mysqlpw
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
 networks:
   fastcampuspay_network:
     driver: bridge

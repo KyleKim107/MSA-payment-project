@@ -22,6 +22,7 @@ public class FirmbankingRequestPersistenceAdapter implements RequestFirmbankingP
             , FirmbankingRequest.ToBankAccountNumber toBankAccountNumber
             , FirmbankingRequest.MoneyAmount moneyAmount
             , FirmbankingRequest.FirmbankingStatus firmbankingStatus) {
+
         RequestFirmbankingJpaEntity firmbankingRequest = firmbankingRequestRepository.save(
                 new RequestFirmbankingJpaEntity(
                         fromBankName.getFromBankName()

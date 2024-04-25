@@ -44,7 +44,7 @@ public class RegisteredBankAccountService implements RegisterBankAccountUseCase 
                     ,new RegisteredBankAccount.BankName(command.getBankName())
                     ,new RegisteredBankAccount.BankAccountNumber(command.getBankAccountNumber())
                     ,new RegisteredBankAccount.LinkedStatusIsValid(isValid));
-            return mapper.mapToDaminEntity(bankAccountJpa) ;
+            return mapper.mapToDaminEntity(bankAccountJpa);
         }else{
             return null;
         }
