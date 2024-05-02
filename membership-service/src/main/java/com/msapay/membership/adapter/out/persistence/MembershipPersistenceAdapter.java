@@ -2,9 +2,9 @@ package com.msapay.membership.adapter.out.persistence;
 
 import com.msapay.membership.application.port.out.FindMembershipPort;
 import com.msapay.membership.application.port.out.ModifyMembershipPort;
+import com.msapay.membership.domain.Membership;
 import com.msapay.common.PersistenceAdapter;
 import com.msapay.membership.application.port.out.RegisterMembershipPort;
-import com.msapay.membership.domain.Membership;
 import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter

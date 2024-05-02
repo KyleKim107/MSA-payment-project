@@ -1,8 +1,8 @@
 package com.msapay.membership.adapter.in.web;
 
-import com.msapay.common.WebAdapter;
 import com.msapay.membership.application.port.in.RegisterMembershipCommand;
 import com.msapay.membership.application.port.in.RegisterMembershipUseCase;
+import com.msapay.common.WebAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
