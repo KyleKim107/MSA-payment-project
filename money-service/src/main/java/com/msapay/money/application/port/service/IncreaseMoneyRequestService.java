@@ -29,7 +29,7 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyRequestUseCase 
 
     private final IncreaseMoneyPort increaseMoneyPort;
     private final MoneyChangingRequestMapper mapper;
-    private final GetMembershipPort getMembershipPort;
+//    private final GetMembershipPort getMembershipPort;
     private final SendRechargingMoneyTaskPort sendRechargingMoneyTaskPort;
     private final CountDownLatchManager countDownLatchManager;
 
@@ -37,7 +37,7 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyRequestUseCase 
     public MoneyChangingRequest increaseMoneyRequest(IncreaseMoneyRequestCommand command) {
         //머니 충전, 증액이라는 과정
         // 1 고객 정보가 정상인지 확인 (membership)
-        getMembershipPort.getMembership(command.getTargetMembershipId());
+//        getMembershipPort.getMembership(command.getTargetMembershipId());
         // 2 고객의 연동된 계좌가 있는지 그리고 정상적인지 확인 (banking)
 
         // 3. 법인계좌 상태도 정상인지 확인 (banking)

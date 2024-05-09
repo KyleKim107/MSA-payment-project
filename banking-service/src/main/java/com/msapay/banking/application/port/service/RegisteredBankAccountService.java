@@ -6,7 +6,6 @@ import com.msapay.banking.adapter.out.persistence.RegisteredBankAccountMapper;
 import com.msapay.banking.adapter.out.service.MembershipStatus;
 import com.msapay.banking.application.port.in.RegisterBankAccountCommand;
 import com.msapay.banking.application.port.in.RegisterBankAccountUseCase;
-import com.msapay.banking.application.port.out.GetMembershipPort;
 import com.msapay.banking.application.port.out.RegisterBankAccountPort;
 import com.msapay.banking.application.port.out.RequsetBankAccountInfoPort;
 import com.msapay.common.UseCase;
@@ -23,23 +22,21 @@ public class RegisteredBankAccountService implements RegisterBankAccountUseCase 
     private final RegisterBankAccountPort registerBankAccountPort; // DB접근을 위한 포트
     private final RegisteredBankAccountMapper mapper;
     private final RequsetBankAccountInfoPort requsetBankAccountInfoPort;
-    private final GetMembershipPort getMembershipPort;
     @Override
     public RegisteredBankAccount registerBankAccount(RegisterBankAccountCommand command) {
-        // 은행 계좌를 등록해야하는 상황
-        //1. 등록된 계좌인지 확인한다
-        //외부의 은행에 이 계좌 정상인지 확인한다
-        MembershipStatus membershipStatus = getMembershipPort.getMembership(command.getMembershipId());
-        if(!membershipStatus.isValid()){
-            return null;
-        }
-
-        // biz logic -> external system
-        // Port -> Adapter -> external system
-        // Port ->
 
 
-        //실제 외부의 은행계좌 정보를 Get
+        // 은행 계좌를 등록해야하는 서비스 (비즈니스 로직)
+        // command.getMembershipId()
+
+        // (멤버 서비스도 확인?) 여기서는 skip
+
+        // 1. 외부 실제 은행에 등록이 가능한 계좌인지(정상인지) 확인한다.
+        // 외부의 은행에 이 계좌 정상인지? 확인을 해야해요.
+        // Biz Logic -> External System
+        // Port -> Adapter -> External System
+        // Port
+        // 실제 외부의 은행계좌 정보를 Get
         BankAccount accountInfo = requsetBankAccountInfoPort.getBankAccountInfo(new GetBankAccountRequest(command.getBankName(), command.getBankAccountNumber()));
         boolean isValid = accountInfo.isLinkedStatusIsValid();
 
