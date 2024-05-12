@@ -81,7 +81,7 @@ public class RechargingMoneyResultConsumer {
                             this.loggingProducer.sendMessage(task.getTaskID(), "task failed");
                             this.countDownLatchManager.setDataForKey(task.getTaskID(), "failed");
                         }
-                        try{ // 테스
+                        try{ //
                             Thread.sleep(3000);
                         }catch (Exception e){
                             e.printStackTrace();
